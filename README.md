@@ -8,3 +8,4 @@
 2. 请使用ehcache管理缓存；
 3. 请注意使用断路器等机制；
 4. 有兴趣的同学可自学一些reactjs或vuejs等为microPoS开发一个前端。
+

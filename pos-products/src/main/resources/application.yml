@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: pos-products
+server:
+  port: 1145
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:1111/eureka

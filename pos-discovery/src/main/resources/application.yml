@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: eureka
+#  main:
+#    web-application-type: reactive
+eureka:
+  client:
+    registerWithEureka: false
+    fetchRegistry: false
+    service-url:
+      defaultZone: http://127.0.0.1:1111/eureka
+server:
+  port: 1111

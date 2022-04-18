@@ -11,5 +11,16 @@
 
     <artifactId>pos-discovery</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <!--  JAXB is required since Java 9  -->
+        <dependency>
+            <groupId>org.glassfish.jaxb</groupId>
+            <artifactId>jaxb-runtime</artifactId>
+        </dependency>
+    </dependencies>
 
 </project>

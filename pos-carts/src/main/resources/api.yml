@@ -1,0 +1,239 @@
+openapi: "3.0.0"
+info:
+  version: 1.0.0
+  title: Products
+  license:
+    name: MIT
+paths:
+  /carts/{username}:
+    get:
+      summary: 查看username用户的购物车
+      operationId: getCart
+      tags:
+        - cart
+      parameters:
+        - name: username
+          in: path
+          required: true
+          description: 用户名
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 用户的购物车
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Cart"
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    delete:
+      summary: 清空购物车
+      operationId: emptyCart
+      tags:
+        - cart
+      parameters:
+        - name: username
+          in: path
+          required: true
+          description: 用户名
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 用户的购物车
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Cart"
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /carts/{username}/{productId}:
+    post:
+      summary: 向用户名为username的购物车添加商品
+      operationId: addProduct
+      tags:
+        - cart
+      parameters:
+        - name: username
+          in: path
+          required: true
+          description: 用户名
+          schema:
+            type: string
+        - name: productId
+          in: path
+          required: true
+          description: 商品的id
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 返回用户购物车
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Cart"
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    delete:
+      summary: 向用户名为username的购物车删除商品
+      operationId: deleteProduct
+      tags:
+        - cart
+      parameters:
+        - name: username
+          in: path
+          required: true
+          description: 用户名
+          schema:
+            type: string
+        - name: productId
+          in: path
+          required: true
+          description: 商品的id
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 返回用户购物车
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Cart"
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /carts/{username}/{productId}/incr:
+    put:
+      summary: 将指定商品数量+1
+      operationId: increaseProduct
+      tags:
+        - cart
+      parameters:
+        - name: username
+          in: path
+          required: true
+          description: 用户名
+          schema:
+            type: string
+        - name: productId
+          in: path
+          required: true
+          description: 商品的id
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 用户的购物车
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Cart"
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /carts/{username}/{productId}/decr:
+    put:
+      summary: 将指定商品数量-1
+      operationId: decreaseProduct
+      tags:
+        - cart
+      parameters:
+        - name: username
+          in: path
+          required: true
+          description: 用户名
+          schema:
+            type: string
+        - name: productId
+          in: path
+          required: true
+          description: 商品的id
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 用户的购物车
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Cart"
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+
+
+
+components:
+  schemas:
+    Cart:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: "#/components/schemas/Item"
+    Carts:
+      type: array
+      items:
+        $ref: "#/components/schemas/Cart"
+    Product:
+      type: object
+      required:
+        - id
+        - name
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        price:
+          type: double
+        image:
+          type: string
+    Item:
+      type: object
+      properties:
+        product:
+          $ref: "#/components/schemas/Product"
+        quantity:
+          type: integer
+          format: int32
+    Items:
+      type: array
+      items:
+        $ref: "#/components/schemas/Item"
+    Error:
+      type: object
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
