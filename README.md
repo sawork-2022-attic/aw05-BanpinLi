@@ -1,11 +1,9 @@
 # RESTful microPoS 
 
+### 本次作业主要是对上次作业的一次重构，在代码的逻辑方面并没有很大的改变
 
-请参考spring-petclinic-rest/spring-petclinic-microserivces 将aw04的webpos项目改为rest风格的微服务架构
-（至少包含产品管理服务pos-products和购物车管理服务pos-carts以及discovery/gateway等微服务架构下需要的基础设施服务）。具体要求包括：
+1、使用OpenAPI定义了product服务的接口并进行了相应实现，同时定义了Carts的相关接口给出了相关实现
 
-1. 请使用OpenAPI的定义每个服务的rest接口（参考pos-products）
-2. 请使用ehcache管理缓存；
-3. 请注意使用断路器等机制；
-4. 有兴趣的同学可自学一些reactjs或vuejs等为microPoS开发一个前端。
+2、使用echcache对从京东抓取锅过来的数据进行了缓存，并将通过id查询的product进行了缓存
 
+3、对pos-carts模块提供了断路器机制
